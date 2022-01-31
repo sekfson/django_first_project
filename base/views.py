@@ -1,15 +1,11 @@
 from this import d
 from unicodedata import name
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.template import context
-from .models import Romm
+from .models import Room
+from .forms import RoomForm
 
-rooms=[
-    {'id':1 ,'name':'kourouma'},
-    {'id':2,'name':'balde'},
-    {'id':3,'name':'bangoura'},
-]
 
 def home_view(request):
     return render(request,'home.html')
@@ -17,6 +13,16 @@ def home_view(request):
 
 
 def room_view(request,pk):
-    rooms=Romm.objects.all()   
+    rooms=Room.objects.all()   
     context={'rooms':rooms}
     return render(request,'base/room.html',context)
+
+def createRoom(request):
+    form=RoomForm
+    if request.method=='POST':
+        form=RoomForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    context={'form':form}
+    return render(request,'base/room_form.html', context)
