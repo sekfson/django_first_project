@@ -3,8 +3,9 @@ from unicodedata import name
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import context
+from .models import Romm
 
-contacts=[
+rooms=[
     {'id':1 ,'name':'kourouma'},
     {'id':2,'name':'balde'},
     {'id':3,'name':'bangoura'},
@@ -15,10 +16,7 @@ def home_view(request):
 
 
 
-def contact_view(request,pk):
-    contact=None
-    for i in contacts:
-        if i['id']== int(pk):
-            contact=i    
-    context={'contacts':contacts}
-    return render(request,'base/contact.html',context)
+def room_view(request,pk):
+    rooms=Romm.objects.all()   
+    context={'rooms':rooms}
+    return render(request,'base/room.html',context)

@@ -7,9 +7,9 @@
 </head>
 <body>
     <div>
-        {% for con in contacts %}
+        {% for room in rooms %}
         <div>
-            <p>nous somme; {{con.id}}  <a href="{% url 'com' con.id %}"> {{con.name}}</a></p>
+            <p>nous somme; {{room.id}}  <a href="{% url 'com' room.id %}"> {{room.name}}</a></p>
         </div>
         {% endfor %}
     </div>
