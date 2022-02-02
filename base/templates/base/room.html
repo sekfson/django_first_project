@@ -9,9 +9,11 @@
     
     <div>
         <a href="{% url 'create-room' %}">form</a>
-        {% csrf_token %}
+        
         {% for room in rooms %}
         <div>
+            <a href="{% url 'update-room' room.id %}">edit</a>
+            <a href="">delete</a>
             <span>@{{room.host.username}}</span>
             <p>nous somme; {{room.id}}  <a href="{% url 'com' room.id %}"> {{room.name}}</a></p>
             <small>{{room.topic.name}}</small>
